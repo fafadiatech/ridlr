@@ -1,0 +1,19 @@
+Quiz	Python 101					
+Timed	Y					
+Max Time In Mins	75					
+##						
+Quiz Structure						
+Python/Basics	1					
+Python/Intermediate	1					
+						
+						
+##						
+Category	Sub Category	Question Type	Point	Question	Choices	Correct
+Programming	Python/Basics	MCQ	1	Which of this is not Python Data Type?	list	
+					set	
+					dict	
+					class	Y
+	Python/Intermediate	MCQ	2	What is `defaultdict` in `collections` module?	Override default dictionary implementation	
+					Define type of default value in `defaultdict`	Y
+					There is no `collections` module	
+					None of the Above	

@@ -43,8 +43,16 @@ class QuizStructure(models.Model):
     def __str__(self):
         return f"{self.category}-{self.id}-{self.name}"
 
+class QuestionType(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
 class Question(models.Model):
     blurb = models.TextField()
+    question_type = models.ForeignKey(QuestionType, on_delete=models.CASCADE)
+    point = models.IntegerField(default=1)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
 
@@ -59,6 +67,15 @@ class Choice(models.Model):
     def __str__(self):
         return f"{self.question}-{self.choice}"
 
+# this is the model that stores sequence
+# of question that needs to filled in
+class QuestionBank(models.Model):
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    questions = models.ManyToManyField(Question)
+
+    def __str__(self):
+        return f"{self.quiz}-{self.id}"
+
 class Invitation(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     invitation_for = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -70,6 +87,7 @@ class Invitation(models.Model):
 
 class TestSession(models.Model):
     invitation = models.ForeignKey(Invitation, on_delete=models.CASCADE)
+    question_bank = models.ForeignKey(QuestionBank, on_delete=models.CASCADE)
     started_ts = models.DateTimeField(default=timezone.now)
     completed_ts = models.DateTimeField(blank=True, null=True, default=None)
 
