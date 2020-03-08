@@ -13,7 +13,7 @@ Programming	Python/Basics	MCQ	1	Which of this is not Python Data Type?	list
 					set	
 					dict	
 					class	Y
-	Python/Intermediate	MCQ	2	What is `defaultdict` in `collections` module?	Override default dictionary implementation	
+Programming	Python/Intermediate	MCQ	2	What is `defaultdict` in `collections` module?	Override default dictionary implementation	
 					Define type of default value in `defaultdict`	Y
 					There is no `collections` module	
 					None of the Above	
