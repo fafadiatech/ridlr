@@ -1,3 +1,4 @@
+import random
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -75,6 +76,37 @@ class QuestionBank(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     questions = models.ManyToManyField(Question)
 
+    @classmethod
+    def generate(self, invitation_code):
+        invitation = Invitation.objects.get(invitation_code=invitation_code)
+        quiz = invitation.quiz
+        results = {}
+        results['quiz'] = quiz.name
+        results['timed'] = quiz.timed
+        results['time_limit'] = quiz.time_limit
+        question_bank = random.choice(QuestionBank.objects.filter(quiz=quiz))
+        results['questions'] = []
+        for current in question_bank.questions.all():
+            row = {}
+            row["id"] = current.id
+            row["question"] = current.blurb
+            row["question_type"] = current.question_type.name
+            row["point"] = current.point
+            row["sub_category"] = current.sub_category.name
+            row["choices"] = []
+
+            for current_choice in Choice.objects.filter(question=current):
+                choice_row = {}
+                choice_row["choice"] = current_choice.choice
+                choice_row["correct"] = current_choice.correct
+                row["choices"].append(choice_row)
+
+            random.shuffle(row["choices"])
+            results["questions"].append(row)
+        random.shuffle(results["questions"])
+
+        return results
+
     def __str__(self):
         return f"{self.quiz}-{self.id}"
 
@@ -82,6 +114,7 @@ class Invitation(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     invitation_for = models.ForeignKey(User, on_delete=models.CASCADE)
     invitation_code = models.CharField(max_length=25)
+    consumed = models.BooleanField(default=False)
     ts = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

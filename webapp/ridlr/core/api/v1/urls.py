@@ -1,8 +1,8 @@
 from django.conf.urls import url
 
-from .views import QuestionBank
+from .views import QuestionsAPI
 
 urlpatterns = [
-    url(r'^questions/$', QuestionBank.as_view(),
+    url(r'^questions/$', QuestionsAPI.as_view(),
         name="questions"),
 ]
