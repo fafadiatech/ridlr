@@ -1,4 +1,3 @@
-import sys
 import json
 from django.core.management.base import BaseCommand, CommandError
 from core.models import (Category, SubCategory, Quiz, QuizStructure, \
@@ -116,8 +115,7 @@ class Command(BaseCommand):
                 # create quiz
                 quiz = None
                 if Quiz.objects.filter(name=results["quiz"]).exists():
-                    print(f"Quiz {results['quiz']} already exists")
-                    sys.exit(-1)
+                    raise CommandError(f"Quiz {results['quiz']} already exists")
                 else:
                     quiz = Quiz()
                     quiz.name = results['quiz']
