@@ -11,7 +11,7 @@ class QuestionsAPI(APIView):
     def get(self, request, format=None):
         invitation_code = request.GET.get("invitation_code", "")
 
-        # error handing
+        # error handling
         if invitation_code == "":
             raise APIException("Invalid Invitation Code")
 
