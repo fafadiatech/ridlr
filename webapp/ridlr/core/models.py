@@ -34,6 +34,8 @@ class Quiz(models.Model):
     def __str__(self):
         return f"{self.category}-{self.id}-{self.name}"
 
+# this tell Ridlr, how to generate QuestionBank
+# basically tuple of sub_category, frequency mapping
 class QuizStructure(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -41,7 +43,7 @@ class QuizStructure(models.Model):
     frequency = models.IntegerField(default=1)
 
     def __str__(self):
-        return f"{self.category}-{self.id}-{self.name}"
+        return f"{self.id}-{self.quiz}-{self.category}-{self.sub_category}"
 
 class QuestionType(models.Model):
     name = models.CharField(max_length=255)
