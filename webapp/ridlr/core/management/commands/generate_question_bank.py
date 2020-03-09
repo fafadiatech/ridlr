@@ -32,10 +32,11 @@ class Command(BaseCommand):
                         continue
                     chosen_questions.append(candidate)
                     processed[key] += 1
-            
+
             question_bank = QuestionBank()
             question_bank.quiz = quiz
-            question_bank.chosen_question = chosen_questions
+            question_bank.save()
+            question_bank.questions.set(chosen_questions)
             question_bank.save()
             print("Completed Genrating Questions")
 
