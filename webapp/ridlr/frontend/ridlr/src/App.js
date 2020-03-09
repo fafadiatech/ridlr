@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import {Alert, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavbarText, Button, Progress, Container, Row, Col, Label, Input} from 'reactstrap';
 import Markdown from 'react-markdown';
+import Countdown from "react-countdown";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  const Completionist = () => <span>Done!</span>;
 
   return (
     <div className="App">
@@ -15,7 +17,12 @@ function App() {
               <Collapse isOpen={isOpen} navbar>
                 <Nav className="mr-auto" navbar>
                 </Nav>
-                <NavbarText>Simple Text</NavbarText>&nbsp;&nbsp;
+                <NavbarText>
+                  Time Left:{' '}
+                  <Countdown date={Date.now() + (1000 * 60 * 75)}>
+                    <Completionist />
+                  </Countdown>
+                </NavbarText>&nbsp;&nbsp;
                 <Button color="primary"> Prev </Button>&nbsp;
                 <Button color="primary"> Next </Button>
               </Collapse>
