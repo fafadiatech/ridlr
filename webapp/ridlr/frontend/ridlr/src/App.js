@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {Alert, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavbarText, Button, Progress, Container, Row, Col, Label, Input} from 'reactstrap';
 import Markdown from 'react-markdown';
 import Countdown from "react-countdown";
@@ -10,8 +10,15 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      quizName: "",
       isOpen: false,
       questions: [],
+      questionIndex: 0,
+      currentQuestion: "",
+      currentChoiceA: "",
+      currentChoiceB: "",
+      currentChoiceC: "",
+      currentChoiceD: "",
       timer: 0,
     }
   }
@@ -23,8 +30,15 @@ class App extends React.Component {
 
   doneFetchingQuestions = (data) => {
     console.log("done fetching questions");
+    this.setState({quizName: data.quiz})
     this.setState({timer: data.time_limit})
-    console.log(data.time_limit);
+    this.setState({questions: data.questions})
+    this.setState({currentQuestion: data.questions[0].question})
+    this.setState({currentChoiceA: data.questions[0].choices[0].choice})
+    this.setState({currentChoiceB: data.questions[0].choices[1].choice})
+    this.setState({currentChoiceC: data.questions[0].choices[2].choice})
+    this.setState({currentChoiceD: data.questions[0].choices[3].choice})
+    console.log(data);
   }
 
   fetchQuestions = () => {
@@ -41,7 +55,9 @@ class App extends React.Component {
       <div className="App">
         <Progress striped value="75" />
         <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">Ridlr</NavbarBrand>
+                <NavbarBrand href="/">
+                  Ridlr{' ' + this.state.quizName}
+                </NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                   <Nav className="mr-auto" navbar>
@@ -59,29 +75,37 @@ class App extends React.Component {
           <Alert color="primary">This is cool!</Alert>
           <Container>
             <Row>
-              <Markdown source="## Ut non tempor dolore sunt do cillum esse culpa dolor aute incididunt irure." /><br/><br/><br/>
+              <Markdown source={`## ${this.state.currentQuestion}`} /><br/><br/><br/>
             </Row>
             <Row>
               <Col xs="6">
                 <Label check>
-                  <Input type="radio" name="radio1" />{' '}Option one is this and that—be sure to include why it's great
+                  <Input type="radio" name="radio1" />
+                    {' '}
+                    <Markdown source={this.state.currentChoiceA} />
                 </Label>
               </Col>
               <Col xs="6">
                 <Label check>
-                  <Input type="radio" name="radio1" />{' '}Option one is this and that—be sure to include why it's great
+                  <Input type="radio" name="radio1" />
+                    {' '}
+                    <Markdown source={this.state.currentChoiceB} />
                 </Label>
               </Col>
             </Row>
             <Row>
               <Col xs="6">
                 <Label check>
-                  <Input type="radio" name="radio1" />{' '}Option one is this and that—be sure to include why it's great
+                  <Input type="radio" name="radio1" />
+                    {' '}
+                    <Markdown source={this.state.currentChoiceC} />
                 </Label>
               </Col>
               <Col xs="6">
                 <Label check>
-                  <Input type="radio" name="radio1" />{' '}Option one is this and that—be sure to include why it's great
+                  <Input type="radio" name="radio1" />
+                    {' '}
+                    <Markdown source={this.state.currentChoiceD} />
                 </Label>
               </Col>
             </Row>
