@@ -103,8 +103,8 @@ class QuestionBank(models.Model):
 
             random.shuffle(row["choices"])
             results["questions"].append(row)
-        invitation.consumed = True
-        invitation.save()
+        # invitation.consumed = True
+        # invitation.save()
         random.shuffle(results["questions"])
 
         return results

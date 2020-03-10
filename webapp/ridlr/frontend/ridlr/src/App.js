@@ -2,12 +2,24 @@ import React, { useState } from 'react';
 import {Alert, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavbarText, Button, Progress, Container, Row, Col, Label, Input} from 'reactstrap';
 import Markdown from 'react-markdown';
 import Countdown from "react-countdown";
+import {getRequest} from './utils';
+
+function doneFetchingQuestions(data){
+  console.log("done fetching questions");
+  console.log(data);
+}
+
+function fetchQuestions(){
+  console.log("cool nice!");
+  getRequest("http://localhost:8001/api/v1/questions/?invitation_code=12345", doneFetchingQuestions);
+}
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const Completionist = () => <span>Done!</span>;
 
+  fetchQuestions()
   return (
     <div className="App">
       <Progress striped value="75" />
