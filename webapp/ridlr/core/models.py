@@ -95,13 +95,19 @@ class QuestionBank(models.Model):
             row["sub_category"] = current.sub_category.name
             row["choices"] = []
 
+            correct_choice_id = 0
             for current_choice in Choice.objects.filter(question=current):
                 choice_row = {}
+                choice_row["id"] = current_choice.id
                 choice_row["choice"] = current_choice.choice
                 choice_row["correct"] = current_choice.correct
-                row["choices"].append(choice_row)
 
+                if current_choice.correct:
+                    correct_choice_id = current_choice.id
+
+                row["choices"].append(choice_row)
             random.shuffle(row["choices"])
+            row['correct_choice_id'] = correct_choice_id
             results["questions"].append(row)
         # invitation.consumed = True
         # invitation.save()
