@@ -110,7 +110,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Progress striped value={this.state.progress} />
+        <Progress striped value={this.state.progress}>{this.state.progress}%</Progress>
         <Navbar color="light" light expand="md">
                 <NavbarBrand href="/">
                   Ridlr{' ' + this.state.quizName}
@@ -120,6 +120,7 @@ class App extends React.Component {
                   <Nav className="mr-auto" navbar>
                   </Nav>
                   <NavbarText>
+                    ({this.state.questionIndex+1} of {this.state.questions.length}),
                     Time Left:{' '}
                     <Countdown date={Date.now() + (1000 * this.state.timer * 60)}>
                       <Completionist />
