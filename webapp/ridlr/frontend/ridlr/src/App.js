@@ -12,6 +12,7 @@ class App extends React.Component {
     this.state = {
       quizName: "",
       alertType: "",
+      progress: 10,
       showAlert: false,
       isOpen: false,
       questions: [],
@@ -60,6 +61,7 @@ class App extends React.Component {
           this.setState({correctChoiceId: this.state.questions[this.state.questionIndex].choices[j].id});
         }
       }
+      this.calculateProgress();
     }
 
   }
@@ -93,6 +95,14 @@ class App extends React.Component {
     getRequest("http://localhost:8001/api/v1/questions/?invitation_code=12345", this.doneFetchingQuestions);
   }
 
+  calculateProgress = () => {
+    if(this.state.questionIndex < 0){
+      this.setState({progress: "0"});
+    }else{
+      this.setState({progress: ((this.state.questionIndex/this.state.questions.length) * 100).toString()});
+    }
+  }
+
   componentDidMount(){
     this.fetchQuestions()
   }
@@ -100,7 +110,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Progress striped value="75" />
+        <Progress striped value={this.state.progress} />
         <Navbar color="light" light expand="md">
                 <NavbarBrand href="/">
                   Ridlr{' ' + this.state.quizName}
