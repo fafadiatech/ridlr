@@ -13,7 +13,7 @@ class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route path="/" component={Home} exact/>
-          <Route path="/quiz" component={Quiz}/>
+          <Route path="/quiz/:id" component={Quiz}/>
           <Route path="/summary" component={Summary}/>
           <Route component={Error}/>
         </Switch>

@@ -98,7 +98,10 @@ class Quiz extends React.Component {
     }.bind(this), 2000);
   }
   fetchQuestions = () => {
-    getRequest("http://localhost:8001/api/v1/questions/?invitation_code=12345", this.doneFetchingQuestions);
+    var invitationCode = this.props.match.params.id;
+    var url = `http://localhost:8001/api/v1/questions/?invitation_code=${invitationCode}`;
+    console.log(`URL:${url}`);
+    getRequest(url, this.doneFetchingQuestions);
   }
 
   calculateProgress = () => {
@@ -110,11 +113,10 @@ class Quiz extends React.Component {
   }
 
   componentDidMount(){
-    this.fetchQuestions()
+    this.fetchQuestions();
   }
 
   render() {
-    
     // Redirect to summary once done
     if(this.state.isCompleted){
       return(<Redirect to="/summary" />);
@@ -126,14 +128,14 @@ class Quiz extends React.Component {
         <Progress striped value={this.state.progress}>{this.state.progress}%</Progress>
         <Navbar color="light" light expand="md">
                 <NavbarBrand href="/">
-                  Ridlr{' ' + this.state.quizName}
+                  Ridlr{' ' + this.state.invitationCode},{' ' + this.state.quizName}
                 </NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                   <Nav className="mr-auto" navbar>
                   </Nav>
                   <NavbarText>
-                    ({this.state.questionIndex+1} of {this.state.questions.length}),
+                    Questions: ({this.state.questionIndex+1} of {this.state.questions.length}),
                     Time Left:{' '}
                     <Countdown date={Date.now() + (1000 * this.state.timer * 60)}>
                       <Completionist />
