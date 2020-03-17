@@ -139,6 +139,7 @@ class TestSession(models.Model):
 
 class QuestionResponse(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    invitation = models.ForeignKey(Invitation, on_delete=models.CASCADE)
     response = models.TextField()
     ts = models.DateTimeField(default=timezone.now)
     
