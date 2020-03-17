@@ -25,7 +25,6 @@ class SubCategory(models.Model):
 class Quiz(models.Model):
     name = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     timed = models.BooleanField(default=False)
     time_limit = models.IntegerField(default=0)
 
