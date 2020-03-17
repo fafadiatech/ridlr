@@ -1,5 +1,7 @@
 # Ridlr
 
+![Quiz-Template-Screenshot](screenshots/logo.png "Quiz Template")
+
 Ridlr is simple Online Tutoring & Quiz application written in Django
 
 ## Setting up
