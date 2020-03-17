@@ -27,14 +27,14 @@ Ridlr setup is relatively simpler. It used `Django` for API layer, specifically 
 
 ## Models
 
-1. `Category`:
-1. `SubCategory`: 
-1. `Quiz`:
-1. `QuizStructure`:
-1. `QuestionType`:
-1. `Question`: 
-1. `Choice`: 
-1. `QuestionBank`:
-1. `Invitation`:
-1. `TestSession`:
-1. `QuestionResponse`: 
+1. `Category`: Category related to a Quiz. E.g. `Programming`
+1. `SubCategory`: Sub-Category associated with Quiz E.g. `Python/Collections`
+1. `Quiz`: Quiz is self-explainatory
+1. `QuizStructure`: It is the structure that is used to build `QuestionBank`. It basically tell us how many questions of a given `SubCategory` do we need to include.
+1. `QuestionType`: Right now its only `MCQ` {Multiple Choice Question}, we will be implementing `Open` and `Code` questions 
+1. `Question`: Object of Question that gets added to `QuestionBank`
+1. `Choice`: Object of Choice associated with `Question` and information if its correct
+1. `QuestionBank`: This gets generated and rendered to frontend via API
+1. `Invitation`: We use Invitation codes as opposed to Passwords for authenticating users.
+1. `TestSession`: Meta-data related to test sessions. E.g. When a given Test Session got started and completed
+1. `QuestionResponse`: Log of all responses for a given Question. This is used for audit-trail.
