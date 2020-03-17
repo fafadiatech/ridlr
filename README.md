@@ -1,6 +1,8 @@
 # Ridlr
 
-<img src="./screenshots/logo.png" width="186" height="141"/>
+<p align="center">
+    <img src="./screenshots/logo.png" width="186" height="141"/ >  
+</p>
 
 Ridlr is simple Online Tutoring & Quiz application written in Django
 
