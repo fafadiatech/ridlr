@@ -38,3 +38,18 @@ Ridlr setup is relatively simpler. It used `Django` for API layer, specifically 
 1. `Invitation`: We use Invitation codes as opposed to Passwords for authenticating users.
 1. `TestSession`: Meta-data related to test sessions. E.g. When a given Test Session got started and completed
 1. `QuestionResponse`: Log of all responses for a given Question. This is used for audit-trail.
+
+## Quiz Template Creation Guide
+
+A typical Quiz Template looks like follows
+
+![Quiz-Template-Screenshot](screenshots/00-Quiz-Template.png "Quiz Template")
+
+Key things to note:
+
+1. `Quiz Name`
+1. `Timed`: Tells if the Quiz is Timed
+1. `Max Time In Mins`: If Quiz is timed, what is the maximum allowable time?
+1. `Quiz Structure`: In this section we have one row per `Sub Category`.
+    1. E.g. `Python/Basics	1` implies select one question of category `Python/Basics`
+1. `Category	Sub Category	Question Type	Point	Question	Choices	Correct` is where you start populating your quiz database
